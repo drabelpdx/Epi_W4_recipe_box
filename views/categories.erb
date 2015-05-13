@@ -1,0 +1,8 @@
+<h1><%= @category.name %></h1>
+
+<h2>These are all the recipes for this Category</h2>
+<ul>
+  <% @recipes.each() do |recipe| %>
+  <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
+  <% end %>
+</ul>
