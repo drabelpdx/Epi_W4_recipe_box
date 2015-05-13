@@ -1,8 +1,19 @@
 <h1><%= @category.name %></h1>
 
-<h2>These are all the recipes for this Category</h2>
-<ul>
-  <% @recipes.each() do |recipe| %>
-  <li><a href="/recipes/<%= recipe.id %>"><%= recipe.name %></a></li>
-  <% end %>
-</ul>
+<p>Change category name</p>
+
+<form action="/categories/<%=@category.id()%>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="form-group">
+    <label for="name">Category Name:</label>
+    <input name="name" id="name" type="text"><br><br>
+  </div>
+  <button type="submit" class="btn btn-success">Update</button>
+</form>
+
+<form action="/categories/<%= @category.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <div class="form-group">
+    <button type="submit" class="btn-danger">Delete</button>
+  </div>
+</form>

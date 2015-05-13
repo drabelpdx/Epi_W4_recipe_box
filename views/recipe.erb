@@ -1,0 +1,26 @@
+<h1><%= @recipe.name %></h1>
+
+
+<form action="/recipe/<%=@recipe.id()%>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="form-group">
+    <label for="name">Recipe Name:</label>
+    <TEXTAREA NAME="name" ROWS=2 COLS=30><%= @recipe.name %></TEXTAREA><br><br>
+    <label for="ingredients">List Ingredients:</label>
+    <TEXTAREA NAME="ingredients" ROWS=5 COLS=30><%= @recipe.ingredients %></TEXTAREA><br><br>
+    <label for="instructions">Instructions:</label>
+    <TEXTAREA NAME="instructions" ROWS=5 COLS=30><%= @recipe.instructions %></TEXTAREA><br><br>
+    <label for="category">Category:</label>
+    <input name="category" value="1" id="category" type="text"><br><br>
+    <label for="rating">Rating:</label>
+    <input name="rating" value="1" id="rating" type="text"><br><br>
+</div>
+<button type="submit" class="btn btn-success">Update</button>
+</form>
+
+<form action="/recipe/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <div class="form-group">
+    <button type="submit" class="btn-danger">Delete</button>
+  </div>
+</form>
