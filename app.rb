@@ -37,7 +37,6 @@ end
 
 get('/recipe_add') do
   @recipes = Recipe.all()
-  @categories = Category.all()
   erb(:recipe_form)
 end
 
@@ -47,9 +46,7 @@ post('/recipe_add') do
   instructions = params.fetch('instructions')
   category = params.fetch('category')
   rating = params.fetch('rating')
-
   @recipes = Recipe.all()
-  @categories = Category.all()
   @recipe = Recipe.new({:name => name, :ingredients => ingredients, :instructions => instructions, :rating => rating})
 
   if @recipe.save
@@ -62,6 +59,7 @@ end
 
 get('/recipe/:id') do
   @recipe = Recipe.find(params.fetch("id").to_i)
+  @categories = Category.all()
   erb(:recipe)
 end
 
@@ -73,6 +71,14 @@ patch('/recipe/:id') do
   category = params.fetch('category')
   rating = params.fetch('rating')
   @recipe.update({:name => name, :ingredients => ingredients, :instructions => instructions, :rating => rating})
+  @recipes = Recipe.all()
+  erb(:recipe_form)
+end
+
+patch('/category/recipe/:id') do
+  @recipe = Recipe.find(params.fetch("id").to_i)
+  category_ids = params.fetch("category_ids")
+  @recipe.update({:category_ids => category_ids})
   @recipes = Recipe.all()
   erb(:recipe_form)
 end

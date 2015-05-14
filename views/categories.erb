@@ -17,3 +17,16 @@
     <button type="submit" class="btn-danger">Delete</button>
   </div>
 </form>
+
+<% if @category.recipes().any?() %>
+
+<h3>Here are all the recipes for this category:</h3>
+
+ <ul>
+   <% @category.recipes().each() do |recipe| %>
+     <li><%= recipe.name() %></li>
+   <% end %>
+ </ul>
+<% else %>
+ <p>There are no recipes yet!</p>
+<% end %>

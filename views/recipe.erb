@@ -5,7 +5,7 @@
   <input name="_method" type="hidden" value="patch">
   <div class="form-group">
     <label for="name">Recipe Name:</label>
-    <TEXTAREA NAME="name" ROWS=2 COLS=30><%= @recipe.name %></TEXTAREA><br><br>
+    <TEXTAREA NAME="name" ROWS=1 COLS=30><%= @recipe.name %></TEXTAREA><br><br>
     <label for="ingredients">List Ingredients:</label>
     <TEXTAREA NAME="ingredients" ROWS=5 COLS=30><%= @recipe.ingredients %></TEXTAREA><br><br>
     <label for="instructions">Instructions:</label>
@@ -13,9 +13,9 @@
     <label for="category">Category:</label>
     <input name="category" value="1" id="category" type="text"><br><br>
     <label for="rating">Rating:</label>
-    <input name="rating" value="1" id="rating" type="text"><br><br>
-</div>
-<button type="submit" class="btn btn-success">Update</button>
+    <TEXTAREA NAME="rating" ROWS=1 COLS=5><%= @recipe.rating %></TEXTAREA><br><br>
+  </div>
+  <button type="submit" class="btn btn-success">Update</button>
 </form>
 
 <form action="/recipe/<%= @recipe.id %>" method="post">
@@ -24,3 +24,23 @@
     <button type="submit" class="btn-danger">Delete</button>
   </div>
 </form>
+
+
+<h3>Select all categories that this recipe belongs:</h3>
+
+<% if @categories.any?() %>
+  <form action="/category/recipe/<%= @recipe.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @categories.each() do |category| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="category_ids[]" value="<%= category.id() %>"><%= category.name() %>
+
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add Category</button>
+  </form>
+<% end %>
